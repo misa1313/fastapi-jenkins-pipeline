@@ -3,9 +3,11 @@ pipeline{
         label "docker"
     }
     stages{
-        stage "Pylint"{
-            sh "pip install flake8"
-            sh  "flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics"
+        stage("Pylint"){
+            steps{
+                sh "pip install flake8"
+                sh  "flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics"
+            }
         }
     }
 }
