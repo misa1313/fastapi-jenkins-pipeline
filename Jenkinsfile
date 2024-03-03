@@ -27,4 +27,5 @@ pipeline{
                 sh "docker build otomato/fastapi-example:${currentBuild.number}"
             }
         }
+    }
 }
