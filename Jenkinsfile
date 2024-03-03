@@ -24,7 +24,7 @@ pipeline{
         }
         stage("Docker"){
             steps{
-                sh "docker build otomato/fastapi-example:${currentBuild.number}"
+                sh "docker build . -t otomato/fastapi-example:${currentBuild.number}"
             }
         }
     }
