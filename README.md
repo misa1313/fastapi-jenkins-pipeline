@@ -1,5 +1,5 @@
-# fastapi-action
-🍅 A GitHub action which lints, tests, builds and even deploys a simple python FastAPI application.
+# fastapi-jenkins-pipeline
+🍅 A Jenkins Pipeline which lints, tests, builds and even deploys a simple python FastAPI application.
 ✨ Powered by Uvicorn, an tiny ASGI web server implementation for Python.
 
 ## Jobs
