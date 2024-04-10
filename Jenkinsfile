@@ -27,5 +27,13 @@ pipeline{
                 sh "docker build . -t otomato/fastapi-example:${currentBuild.number}"
             }
         }
+        stage("Deploy"){
+            steps{
+                timeout(time: 3, unit: "MINUTES") {
+	                    input message: 'Do you want to approve the deployment?', ok: 'Yes'
+	                }
+                sh "docker run -d -p 5000:5000 otomato/fastapi-example:${currentBuild.number}"
+            }
+        }
     }
 }
