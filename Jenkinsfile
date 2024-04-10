@@ -32,7 +32,7 @@ pipeline{
                 timeout(time: 3, unit: "MINUTES") {
 	                    input message: 'Do you want to approve the deployment?', ok: 'Yes'
 	                }
-                sh "docker run -d -p 5000:5000 otomato/fastapi-example:${currentBuild.number}"
+                sh "docker run --name fastapi -d -p 5000:80 otomato/fastapi-example:${currentBuild.number}"
             }
         }
     }
