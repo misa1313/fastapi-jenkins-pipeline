@@ -27,4 +27,9 @@ pipeline{
             }
         }
     }
+    post {
+        always {
+            emailext body: 'Build completed.', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Fastapi build process.'
+        }
+    }
 }
