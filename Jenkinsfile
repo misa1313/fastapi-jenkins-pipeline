@@ -29,7 +29,7 @@ pipeline{
     }
     post {
         always {
-            emailext body: 'Build completed.', subject: 'Fastapi build process...', to: 'misaelramirezf@outlook.com'
+            emailext body: 'Build completed.', subject: 'Fastapi build process...'
         }
     }
 }
