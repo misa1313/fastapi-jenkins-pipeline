@@ -5,6 +5,7 @@ pipeline{
             steps{
                 sh "pip3 install flake8 --break-system-packages"
                 sh  "python3 -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics"
+                sh "echo test"
             }
         }
         stage("Unit Tests"){
