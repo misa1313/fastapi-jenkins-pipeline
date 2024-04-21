@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    environment {
+        TO_EMAIL_ADDRESS = credentials('main_dest_email')
+    }
     stages{
         stage("Lint"){
             steps{
@@ -21,15 +24,23 @@ pipeline{
                    onlyIfSuccessful: true
             }
         }
-        stage("Docker"){
+        stage("Docker build"){
             steps{
                 sh "docker build . -t otomato/fastapi-example:${currentBuild.number}"
+            }
+        }
+        stage("Docker Run"){
+            steps{
+                sh "docker run --name fast_api -d otomato/fastapi-example:${currentBuild.number}"
+                sh "echo 'container will run for 3 minutes'"
+                sh "sleep 180"
+                sh "docker rm -f fast_api"
             }
         }
     }
     post {
         always {
-            emailext body: 'Build completed.', subject: 'Fastapi build process...', to: 'misaelramirezf@outlook.com'
+            emailext body: 'Build completed.', subject: 'Fastapi build process...', to: "${TO_EMAIL_ADDRESS}"
         }
     }
 }
