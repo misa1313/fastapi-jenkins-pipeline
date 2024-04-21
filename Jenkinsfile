@@ -40,7 +40,7 @@ pipeline{
     }
     post {
         always {
-            emailext body: 'Build completed.', subject: 'Fastapi build process...', to: "${TO_EMAIL_ADDRESS}"
+            emailext body: 'Build "${currentBuild.number}" completed, log in to see detailed information.', subject: 'Fastapi build process notification.', to: "${TO_EMAIL_ADDRESS}"
         }
     }
 }
