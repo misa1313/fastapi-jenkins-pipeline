@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment {
-        TO_EMAIL_ADDRESS = credentials('main_dest_email')
+        TO_EMAIL_ADDRESS = credentials("main_dest_email")
     }
     stages{
         stage("Lint"){
@@ -33,14 +33,14 @@ pipeline{
             steps{
                 sh "docker run --name fast_api -d otomato/fastapi-example:${currentBuild.number}"
                 sh "echo 'container will run for 3 minutes'"
-                sh "sleep 180"
+                sh "sleep 10"
                 sh "docker rm -f fast_api"
             }
         }
     }
     post {
         always {
-            emailext body: 'Build "${currentBuild.number}" completed, log in to see detailed information.', subject: 'Fastapi build process notification.', to: "${TO_EMAIL_ADDRESS}"
+            emailext body: "Build ${currentBuild.number} completed, log in to see detailed information.", subject: "Fastapi build process notification.", to: "${TO_EMAIL_ADDRESS}"
         }
     }
 }
