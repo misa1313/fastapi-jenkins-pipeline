@@ -1,14 +1,13 @@
 pipeline{
     agent any
     environment {
-        TO_EMAIL_ADDRESS = credentials("main_dest_email")
+        TO_EMAIL_ADDRESS = credentials('main_dest_email')
     }
     stages{
         stage("Lint"){
             steps{
                 sh "pip3 install flake8 --break-system-packages"
                 sh  "python3 -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics"
-                sh "echo test"
             }
         }
         stage("Unit Tests"){
@@ -40,7 +39,7 @@ pipeline{
     }
     post {
         always {
-            emailext body: "Build ${currentBuild.number} completed, log in to see detailed information.", subject: "Fastapi build process notification.", to: "${TO_EMAIL_ADDRESS}"
+            emailext body: "Build ${currentBuild.number} completed, log in to see detailed information.", subject: "Fastapi build process notification.", to: env.TO_EMAIL_ADDRESS
         }
     }
 }
