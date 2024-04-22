@@ -31,8 +31,8 @@ pipeline{
         stage("Docker Run"){
             steps{
                 sh "docker run --name fast_api -d otomato/fastapi-example:${currentBuild.number}"
-                sh "echo 'container will run for 3 minutes'"
-                sh "sleep 10"
+                sh "echo 'Container will run for 3 minutes'"
+                sh "sleep 180"
                 sh "docker rm -f fast_api"
             }
         }
